@@ -16,7 +16,7 @@ class CheckingReturn:
 			return count_dic
 
 	def creative_folder():
-		name_root = input('enter your name of project')
+		name_root = input('enter your name of project: ')
 		os.mkdir(name_root)
 		name_f = name_root + '/assets'
 		os.mkdir(name_f)
@@ -34,18 +34,48 @@ class CheckingReturn:
 		for name,value in res_dict.items():
 			name = name_project+"/"+name+".html"
 			files = open(name, "w")
-			files.write('<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>%s</title>\n    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">\n    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">\n    <link rel="stylesheet" href="assets/styles/master.css"></head>\n<body>\n</body>\n</html>'%(value))
+			files.write('<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>%s</title>\n    <link href="assets/styles/master.css" rel="stylesheet">\n</head>\n<body>\n</body>\n</html>'%(value))
 			files.close()
 
-files_count = int(input("how many files you want? "))
+	def css_creator(name_root):
+		cssorsass = input('css or sass ?')
+		if cssorsass == 'sass':
+			fi = open(f'{name_root}/assets/styles/global.sass', 'w')
+			fi.write(':root{font-size:10px;}\n*{margin : 0; padding : 0;box-sizing: border-box;}\nbody{font-size: 1.6rem;}\na,a:visited,\na::selection {color: black;text-decoration: none;}\nul{list-style-type: none;}')
+			fi.close()
+			fe = open(f'{name_root}/assets/styles/master.sass', 'w')
+			fe.write('@import global;\n// you can write code here...')
+			fe.close()
+			masterq = input('do you want master.css? (yes or no)')
+			if masterq == "yes":
+				fi = open(f'{name_root}/assets/styles/master.css','w')
+				fi.close()
 
-result = CheckingReturn(files_count)
+		elif cssorsass == 'css':
+			fi = open(f'{name_root}/assets/styles/master.css','w')
+			fi.write(':root{font-size:10px;}\n*{margin : 0; padding : 0;box-sizing: border-box;}\nbody{font-size: 1.6rem;}\na,a:visited,\na::selection {color: black;text-decoration: none;}\nul{list-style-type: none;}')
+			fi.close()
+		else:
+			print(f"{cssorsass} is not find")
 
-result_files_count = result.files_count_f()
+try:
+	files_count = int(input("how many html file you want? "))
+	result = CheckingReturn(files_count)
+	result_files_count = result.files_count_f()
+except ValueError:
+	print('you most be enter a number')
 
-if result_files_count == True:
-	print("try again\nyour number is big")
-else:
-	name_of_project = CheckingReturn.creative_folder()
-	result_end = result.creative_index(result_files_count,name_of_project)
-	print("done")
+
+try:
+	if result_files_count == True:
+		print("try again\nyour number is big")
+	else:
+		try:
+			name_of_project = CheckingReturn.creative_folder()
+			result_end = result.creative_index(result_files_count,name_of_project)
+			CheckingReturn.css_creator(name_of_project)
+			print("done")
+		except:
+			print('you have a error Trye Again')
+except NameError:
+	print('an error ;(')
