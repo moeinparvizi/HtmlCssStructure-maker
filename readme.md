@@ -64,6 +64,8 @@ moein parvizi
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+![idk](https://github.com/moeinparvizi/HtmlCssStructure-maker/assets/38692466/93daab3a-8451-49cf-bf09-aabd25291ff5)
+
 This project is so that you don't need to repeat creating folders and files. Suppose you need 4 folders and a large number of files and you need duplicate entries inside each file, so this program will help you to avoid duplicate entries.
 
 #### Before you use the program, you need to put it in the desired folder..
